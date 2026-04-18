@@ -1,0 +1,551 @@
+/* ================================================================
+   ingredients.css — Administrative Inventory Layout
+   Team 3 | CSCI 4750 Systems Analysis and Design
+
+   Theme: Botanical admin dashboard — soft card elevation,
+   falling leaf animations, gentle hover transitions,
+   warm mist backgrounds evoking a quiet morning restaurant.
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   FALLING LEAVES ANIMATION — Background ambiance
+   ---------------------------------------------------------------- */
+@keyframes leafFall {
+    0%   { transform: translateY(-5vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.6; }
+    50%  { transform: translateY(50vh) rotate(180deg) translateX(30px); opacity: 0.4; }
+    100% { transform: translateY(105vh) rotate(360deg) translateX(-20px); opacity: 0; }
+}
+
+@keyframes leafSway {
+    0%   { transform: translateY(-5vh) rotate(0deg) translateX(0); opacity: 0; }
+    10%  { opacity: 0.5; }
+    30%  { transform: translateY(30vh) rotate(90deg) translateX(-40px); }
+    60%  { transform: translateY(60vh) rotate(200deg) translateX(25px); opacity: 0.35; }
+    100% { transform: translateY(105vh) rotate(340deg) translateX(-10px); opacity: 0; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ----------------------------------------------------------------
+   PAGE HERO
+   ---------------------------------------------------------------- */
+.page-hero {
+    background-color: var(--green-deep);
+    text-align: center;
+    padding: 4rem 2.5rem 3rem;
+    border-bottom: 4px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero::before {
+    content: '🌿';
+    position: absolute;
+    font-size: 12rem;
+    opacity: 0.06;
+    top: -20px;
+    right: -20px;
+    pointer-events: none;
+}
+
+.page-hero::after {
+    content: '🍃';
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.05;
+    bottom: -10px;
+    left: 30px;
+    pointer-events: none;
+    transform: rotate(-20deg);
+}
+
+.page-hero-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--green-sage);
+    margin-bottom: 0.5rem;
+    animation: fadeIn 0.8s ease both;
+}
+
+.page-hero-heading {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    animation: fadeInUp 0.8s ease 0.1s both;
+}
+
+.page-hero-sub {
+    font-size: 1rem;
+    color: rgba(238, 245, 232, 0.7);
+    max-width: 500px;
+    margin-inline: auto;
+    animation: fadeIn 0.8s ease 0.3s both;
+}
+
+/* ----------------------------------------------------------------
+   SHARED TYPOGRAPHY
+   ---------------------------------------------------------------- */
+.section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--green-mid);
+    margin-bottom: 0.25rem;
+}
+
+.section-heading {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    color: var(--green-deep);
+    line-height: 1.2;
+}
+
+.section-heading em {
+    font-style: italic;
+    color: var(--terracotta);
+}
+
+/* ----------------------------------------------------------------
+   LEAF DIVIDER
+   ---------------------------------------------------------------- */
+.leaf-divider {
+    text-align: center;
+    padding: 1.5rem 0;
+    color: var(--green-light);
+    font-size: 1.5rem;
+    letter-spacing: 0.5rem;
+}
+
+/* ----------------------------------------------------------------
+   DB CONTAINER — Main content area with floating leaves
+   ---------------------------------------------------------------- */
+.db-container {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.6s ease both;
+}
+
+/* Floating leaf particles */
+.db-container::before,
+.db-container::after {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    font-size: 1.6rem;
+}
+
+.db-container::before {
+    content: '🍃';
+    top: 0;
+    left: 8%;
+    animation: leafFall 12s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.db-container::after {
+    content: '🌿';
+    top: 0;
+    right: 12%;
+    animation: leafSway 15s ease-in-out infinite;
+    animation-delay: 4s;
+}
+
+/* ----------------------------------------------------------------
+   SEARCH & ACTION BAR
+   ---------------------------------------------------------------- */
+.db-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.db-search-group {
+    flex: 1;
+    max-width: 380px;
+}
+
+.db-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Form elements */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--green-deep);
+    margin-bottom: 0.4rem;
+}
+
+.form-input {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--linen);
+    border-radius: 8px;
+    background-color: var(--cream);
+    color: var(--green-deep);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: var(--green-sage);
+    font-style: italic;
+}
+
+.form-input:focus {
+    border-color: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(62, 105, 74, 0.15);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-pill);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.btn-primary {
+    background-color: var(--terracotta);
+    color: var(--cream);
+    border-color: var(--terracotta);
+}
+
+.btn-primary:hover {
+    background-color: rgb(160, 75, 45);
+    border-color: rgb(160, 75, 45);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(188, 90, 55, 0.3);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--green-mid);
+    border-color: var(--green-light);
+}
+
+.btn-outline:hover {
+    background-color: var(--green-mist);
+    border-color: var(--green-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(28, 58, 38, 0.1);
+}
+
+/* ----------------------------------------------------------------
+   TABLE — Inventory data grid
+   ---------------------------------------------------------------- */
+.db-table-wrapper {
+    overflow-x: auto;
+    border: 2px solid var(--green-light);
+    border-radius: 16px;
+    background-color: var(--cream);
+    box-shadow: 0 4px 20px rgba(28, 58, 38, 0.06);
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.6s ease 0.35s both;
+}
+
+#ingredientTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+#ingredientTable thead tr {
+    background: var(--green-deep);
+    color: var(--cream);
+}
+
+#ingredientTable th {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: bold;
+}
+
+#ingredientTable th:first-child {
+    border-radius: 14px 0 0 0;
+}
+
+#ingredientTable th:last-child {
+    border-radius: 0 14px 0 0;
+}
+
+#ingredientTable td {
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--linen);
+    color: rgb(70, 85, 70);
+    transition: background-color var(--transition-base);
+}
+
+/* Striped rows */
+#ingredientTable tbody tr:nth-child(even) {
+    background: rgba(232, 242, 228, 0.35);
+}
+
+/* Row hover — gentle warmth */
+#ingredientTable tbody tr {
+    transition: all var(--transition-base);
+}
+
+#ingredientTable tbody tr:hover {
+    background: rgba(195, 220, 190, 0.25);
+    transform: scale(1.002);
+}
+
+#ingredientTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.ingredient-name {
+    color: var(--green-deep);
+    font-weight: bold;
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+}
+
+.ingredient-name span {
+    display: block;
+    font-size: 0.75rem;
+    font-family: var(--font-body);
+    font-weight: normal;
+    color: var(--green-sage);
+    margin-top: 0.15rem;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: transform var(--transition-base);
+}
+
+.status-badge:hover {
+    transform: scale(1.05);
+}
+
+.status-low {
+    background: rgba(195, 158, 68, 0.15);
+    color: rgb(160, 128, 40);
+    border: 1px solid rgba(195, 158, 68, 0.3);
+}
+
+.status-in-stock {
+    background: rgba(62, 105, 74, 0.12);
+    color: var(--green-mid);
+    border: 1px solid rgba(62, 105, 74, 0.25);
+}
+
+.status-out {
+    background: rgba(188, 90, 55, 0.12);
+    color: var(--terracotta);
+    border: 1px solid rgba(188, 90, 55, 0.25);
+}
+
+/* Table edit button */
+.table-edit-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.72rem;
+}
+
+/* ----------------------------------------------------------------
+   NOTICE BOX — System integrations card
+   ---------------------------------------------------------------- */
+.notice-box {
+    background: linear-gradient(135deg, var(--green-mist), rgba(232, 242, 228, 0.5));
+    border: 2px solid var(--green-light);
+    border-left: 5px solid var(--green-mid);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.6s ease 0.5s both;
+    transition: all var(--transition-base);
+}
+
+.notice-box:hover {
+    box-shadow: 0 6px 20px rgba(28, 58, 38, 0.08);
+    transform: translateY(-2px);
+}
+
+.notice-box strong {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--green-deep);
+}
+
+.notice-box ul {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgb(70, 85, 70);
+    list-style: none;
+    padding: 0;
+}
+
+.notice-box li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(195, 220, 190, 0.3);
+    transition: padding-left var(--transition-base);
+}
+
+.notice-box li:last-child {
+    border-bottom: none;
+}
+
+.notice-box li:hover {
+    padding-left: 0.5rem;
+}
+
+/* ----------------------------------------------------------------
+   FOOTER
+   ---------------------------------------------------------------- */
+.site-footer {
+    background-color: var(--green-deep);
+    border-top: 4px solid var(--gold);
+    padding: 2rem 2.5rem;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    font-size: 0.8rem;
+    color: var(--green-sage);
+}
+
+/* ----------------------------------------------------------------
+   EXTRA FLOATING LEAVES — Additional ambient particles
+   Added via a wrapper pseudo-element layer
+   ---------------------------------------------------------------- */
+body::before,
+body::after {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+body::before {
+    content: '🍂';
+    font-size: 1.2rem;
+    top: 0;
+    left: 25%;
+    animation: leafSway 18s ease-in-out infinite;
+    animation-delay: 6s;
+}
+
+body::after {
+    content: '🍃';
+    font-size: 1rem;
+    top: 0;
+    right: 30%;
+    animation: leafFall 20s ease-in-out infinite;
+    animation-delay: 10s;
+}
+
+/* ----------------------------------------------------------------
+   RESPONSIVE
+   ---------------------------------------------------------------- */
+@media (max-width: 900px) {
+    .db-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .db-search-group {
+        max-width: 100%;
+    }
+
+    .db-actions {
+        justify-content: stretch;
+    }
+
+    .db-actions .btn {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .page-hero {
+        padding: 3rem 1.5rem 2rem;
+    }
+
+    .page-hero-heading {
+        font-size: 2.2rem;
+    }
+
+    .db-container {
+        padding: 1.5rem 1.25rem;
+    }
+
+    #ingredientTable th,
+    #ingredientTable td {
+        padding: 0.65rem 0.75rem;
+        font-size: 0.82rem;
+    }
+
+    .notice-box {
+        padding: 1.25rem 1.5rem;
+    }
+
+    /* Reduce leaf animations on mobile for performance */
+    body::before,
+    body::after,
+    .db-container::before,
+    .db-container::after {
+        display: none;
+    }
+}

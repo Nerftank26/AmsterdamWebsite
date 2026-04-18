@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggestions | The Amsterdam Local</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="site-header" id="siteHeader">
+       <a href="/index.html" class="logo">
+          <span class="logo-the">The Local</span>
+          <span class="logo-main">Amsterdam</span>
+       </a>
+       <button class="nav-toggle" id="navToggle">
+          <span></span><span></span><span></span>
+       </button>
+       <nav class="primary-nav" id="primaryNav">
+          <a href="/index.html" class="nav-link">Home</a>
+          <a href="/menus/index.html" class="nav-link">Menus</a>
+          <a href="/ordering/index.html" class="nav-link">Online Ordering</a>
+          <a href="/reviews/index.html" class="nav-link">Reviews</a>
+          <a href="/suggestions/index.html" class="nav-link active">Suggestions</a>
+          <a href="/about/index.html" class="nav-link">About Us</a>
+          <a href="/contact/index.html" class="nav-link">Contact Us</a>
+          <a href="/login/index.html" class="nav-link nav-link-staff">Staff Login</a>
+       </nav>
+    </header>
+
+    <div class="page-hero">
+       <p class="page-hero-eyebrow">Help Us Improve</p>
+       <h1 class="page-hero-heading">Suggestions</h1>
+       <p class="page-hero-sub">Your feedback shapes what we serve. We read every submission.</p>
+    </div>
+
+    <div class="form-section">
+       <h2 class="section-heading">Share Your Thoughts</h2>
+
+       <p class="intro-text">
+          Whether it's a new menu item idea or feedback on our ordering system 
+          — we want to hear it. Submissions are reviewed by our team weekly.
+       </p>
+
+       <form id="suggestionsForm" action="#" method="post">
+          
+          <div class="form-group">
+             <label class="form-label" for="suggestionCategory">Category <span>*</span></label>
+             <select class="form-input" id="suggestionCategory" name="suggestionCategory">
+                <option value="">Select a category</option>
+                <option value="menu">Menu Item Idea</option>
+                <option value="service">Service Feedback</option>
+                <option value="atmosphere">Atmosphere</option>
+                <option value="ordering">Online Ordering</option>
+                <option value="general">General</option>
+             </select>
+             <span class="form-error" id="suggestionCategoryError"></span>
+          </div>
+
+          <div class="form-group">
+             <label class="form-label" for="suggestionName">Your Name <em class="optional-label">(optional)</em></label>
+             <input type="text" class="form-input" id="suggestionName" placeholder="Jane Doe">
+          </div>
+
+          <div class="form-group">
+             <label class="form-label" for="suggestionEmail">Email <em class="optional-label">(optional)</em></label>
+             <input type="email" class="form-input" id="suggestionEmail" placeholder="jane@example.com">
+          </div>
+
+          <div class="form-group">
+             <label class="form-label" for="suggestionText">Your Suggestion <span>*</span></label>
+             <textarea class="form-input form-textarea" id="suggestionText" rows="7" maxlength="1500" placeholder="Tell us what you think..."></textarea>
+             <span class="form-hint">1500 character limit.</span>
+             <span class="form-error" id="suggestionTextError"></span>
+          </div>
+
+          <div class="form-group checkbox-group">
+             <input type="checkbox" id="anonymous" name="anonymous" class="checkbox-input">
+             <label class="form-label checkbox-label" for="anonymous">
+                Submit anonymously (name and email will not be stored)
+             </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full" onclick="submitSuggestion(); return false;">
+             Submit Suggestion
+          </button>
+
+          <p class="submit-note">Reviewed weekly by our team.</p>
+       </form>
+
+       <div id="suggestionsSuccess">
+          <div class="form-success">
+             <span class="form-success-icon">💬</span>
+             <h3>Thank You!</h3>
+             <p>Your suggestion has been submitted. We appreciate your help in getting better.</p>
+          </div>
+       </div>
+
+    </div>
+
+    <footer class="site-footer">
+       <div class="footer-bottom">
+          <p>&copy; <span id="year"></span> The Amsterdam Local. All rights reserved.</p>
+       </div>
+    </footer>
+
+    <div class="nav-overlay" id="navOverlay"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

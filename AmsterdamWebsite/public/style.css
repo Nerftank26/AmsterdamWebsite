@@ -1,0 +1,146 @@
+/* ================================================================
+   style.css — Global Foundation
+   Team 3 | CSCI 4750 Systems Analysis and Design
+
+   Theme: Botanical Spa — clean greens, monstera leaves,
+   warm cream, terracotta accents, 80s-inspired geometry.
+   Shared across every HTML page on the site.
+   ================================================================ */
+
+/* SECTION 1: CSS VARIABLES
+   The System DNA. Changing a value here updates the entire site. */
+:root {
+    /* --- Primary Brand Palette --- */
+    --green-deep:    rgb(28,  58,  38);   /* Forest green — header, footer */
+    --green-mid:     rgb(62,  105, 74);   /* Medium green — buttons, accents */
+    --green-sage:    rgb(120, 157, 120);  /* Sage — borders, secondary text */
+    --green-light:   rgb(195, 220, 190);  /* Pale green — hover tints, badges */
+    --green-mist:    rgb(232, 242, 228);  /* Near-white green — card backgrounds */
+
+    /* --- Warm Neutrals --- */
+    --cream:         rgb(252, 248, 238);  /* Main page background */
+    --linen:         rgb(228, 218, 200);  /* Borders and dividers */
+    --text-on-dark: rgb(252, 248, 238);
+
+    /* --- 80s Geometric Accents --- */
+    --terracotta:    rgb(188, 90,  55);   /* Badges and highlights */
+    --gold:          rgb(195, 158, 68);   /* Price text, stars, underlines */
+
+    /* --- Typography --- */
+    --font-display:  'Georgia', serif;    /* Elegant serif for headings */
+    --font-body:     'Trebuchet MS', sans-serif; /* Clean body text */
+
+    /* --- Layout & Scaling --- */
+    --max-width:   1160px;
+    --nav-height:  72px;
+    --transition-base: 260ms ease;
+    --radius-pill: 999px;
+}
+
+/* SECTION 2: RESET & BASE
+   Normalizes the box model and sets global typography rules. */
+*, *::before, *::after {
+    box-sizing: border-box; /* Padding is included in width calculations */
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth; /* Enhances UX for internal anchor links */
+}
+
+body {
+    background-color: var(--cream);
+    color: rgb(28, 35, 28);
+    font-family: var(--font-body);
+    line-height: 1.75; /* Improved readability for menu descriptions */
+    padding-top: var(--nav-height); /* Offset for the fixed top header */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* SECTION 3: SHARED NAVIGATION COMPONENTS
+   Persistent Header system used by every module. */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background-color: var(--green-deep);
+    display: flex; /* Flexbox: Horizontal alignment */
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 2.5rem;
+    z-index: 1000;
+    border-bottom: 3px solid var(--green-mid);
+}
+
+/* LOGO SYSTEM: Uses Flexbox 'column' to stack brand name elements */
+.logo {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    font-family: var(--font-display);
+}
+
+.logo-the {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: var(--green-light);
+    letter-spacing: 0.2em;
+}
+
+.logo-main {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--text-on-dark);
+}
+
+/* NAVIGATION LINKS */
+.primary-nav { display: flex; align-items: center; gap: 0.5rem; }
+
+.nav-link {
+    color: var(--green-light);
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    transition: color var(--transition-base);
+}
+
+.nav-link.active {
+    color: var(--cream);
+    border-bottom: 2px solid var(--gold); /* Geometric underline */
+}
+
+/* SECTION 4: GLOBAL INTERIOR PAGE BANNER
+   Standardizes the "Entry Hook" for all sub-pages. */
+.page-hero {
+    background-color: var(--green-deep);
+    text-align: center;
+    padding: 4rem 2.5rem 2.5rem;
+    border-bottom: 4px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero-heading {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    color: var(--cream);
+}
+
+/* SECTION 5: GLOBAL FOOTER */
+.site-footer {
+    background-color: var(--green-deep);
+    border-top: 4px solid var(--gold);
+    padding: 4rem 2.5rem 1.5rem;
+}
+
+/* RESPONSIVE LOGIC: Mobile Toggle visibility */
+@media (max-width: 640px) {
+    .nav-toggle { display: flex; }
+    .primary-nav { display: none; }
+}

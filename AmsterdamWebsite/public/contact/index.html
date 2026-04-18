@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | The Amsterdam Local</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/contact/style.css">
+</head>
+
+<body>
+
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <header class="site-header" id="siteHeader">
+        <a href="/" class="logo">
+            <span class="logo-the">The Local</span>
+            <span class="logo-main">Amsterdam</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Open Navigation">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="primary-nav" id="primaryNav">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/menus/" class="nav-link">Menus</a>
+            <a href="/ordering/" class="nav-link">Online Ordering</a>
+            <a href="/reviews/" class="nav-link">Reviews</a>
+            <a href="/about/" class="nav-link">About Us</a>
+            <a href="/contact/" class="nav-link active">Contact Us</a>
+            <a href="/login/" class="nav-link nav-link-staff">Staff Login</a>
+        </nav>
+    </header>
+
+    <div class="page-hero">
+        <p class="page-hero-eyebrow">Get in Touch</p>
+        <h1 class="page-hero-heading">Contact Us</h1>
+        <p class="page-hero-sub">Reservations, questions, or just want to say hello.</p>
+    </div>
+
+    <div class="hours-location-wrapper">
+        <div class="hours-location-grid">
+
+            <div class="hours-container">
+                <p class="section-eyebrow">When We're Open</p>
+                <h2 class="section-heading section-margin-bottom">Hours</h2>
+                <table class="hours-table">
+                    <tr><td class="day-name">Monday</td><td class="time-cell day-closed">Closed</td></tr>
+                    <tr><td class="day-name">Tuesday</td><td class="time-cell">7:00 AM – 7:00 PM</td></tr>
+                    <tr><td class="day-name">Wednesday</td><td class="time-cell">7:00 AM – 7:00 PM</td></tr>
+                    <tr><td class="day-name">Thursday</td><td class="time-cell">7:00 AM – 7:00 PM</td></tr>
+                    <tr class="weekend"><td class="day-name">Friday</td><td class="time-cell">7:00 AM – 7:00 PM</td></tr>
+                    <tr class="weekend"><td class="day-name">Saturday</td><td class="time-cell">7:00 AM – 7:00 PM</td></tr>
+                    <tr><td class="day-name">Sunday</td><td class="time-cell">7:00 AM – 7:00 PM</td></tr>
+                </table>
+                <p class="hours-note">Kitchen closes 30 minutes before close.</p>
+            </div>
+
+            <div class="location-container">
+                <p class="section-eyebrow">Where To Find Us</p>
+                <h2 class="section-heading section-margin-bottom">Location</h2>
+                <div class="location-map-placeholder">
+                    <div class="location-map-placeholder-text">
+                        <span class="location-map-placeholder-icon">🗺</span>
+                        <p class="location-map-placeholder-label">Google Maps Coming Soon</p>
+                    </div>
+                </div>
+                <address class="location-address">
+                    <strong>The Amsterdam Local</strong><br>
+                    123 Main Street, Clarksville, TN 37040<br>
+                    <a href="tel:9319194778">(931) 919-4778</a>
+                </address>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="leaf-divider">🌿 · 🌱 · 🌿</div>
+
+    <div class="form-section">
+        <h2 class="section-heading section-margin-bottom">Make a Reservation</h2>
+
+        <form id="reservationForm" action="#" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="firstName">First Name <span>*</span></label>
+                    <input type="text" class="form-input" id="firstName" placeholder="Jane" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="lastName">Last Name <span>*</span></label>
+                    <input type="text" class="form-input" id="lastName" placeholder="Doe" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="resEmail">Email Address <span>*</span></label>
+                <input type="email" class="form-input" id="resEmail" placeholder="jane@example.com" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="resDate">Date <span>*</span></label>
+                    <input type="date" class="form-input" id="resDate" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="resTime">Time <span>*</span></label>
+                    <select class="form-input" id="resTime" required>
+                        <option value="">Select a time</option>
+                        <option value="6:00 PM">6:00 PM</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group party-size-group">
+                <label class="form-label" for="partySize">Party Size <span>*</span></label>
+                <input type="number" class="form-input" id="partySize" min="1" max="8" placeholder="2" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full" onclick="submitReservation(); return false;">
+                Request Reservation
+            </button>
+        </form>
+
+        <div id="formSuccess" class="form-success" style="display:none;">
+            <span class="form-success-icon">🌿</span>
+            <h3>Reservation Requested!</h3>
+            <p>We will confirm via email within 24 hours.</p>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> The Amsterdam Local. All rights reserved.</p>
+            <a href="/login/" class="footer-staff-link">Staff Portal</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

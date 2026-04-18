@@ -1,0 +1,193 @@
+/* ================================================================
+   index.css — Homepage Styles
+   Team 3 | CSCI 4750 Systems Analysis and Design
+
+   Styles specific to the homepage (index.html):
+   Hero banner, CTA buttons, and feature strip cards.
+   ================================================================ */
+
+/* HERO SECTION */
+.hero {
+    position: relative;
+    background-color: var(--green-deep);
+    text-align: center;
+    padding: 6rem 2.5rem 5rem;
+    border-bottom: 4px solid var(--gold);
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.hero-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--green-sage);
+    margin-bottom: 1rem;
+}
+
+.hero-heading {
+    font-family: var(--font-display);
+    font-size: 3.8rem;
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 2rem;
+}
+
+.hero-heading em {
+    font-style: italic;
+    color: var(--gold);
+}
+
+/* Decorative leaves */
+.hero-leaf-left,
+.hero-leaf-right {
+    position: absolute;
+    font-size: 5rem;
+    opacity: 0.15;
+    z-index: 1;
+}
+
+.hero-leaf-left {
+    top: 1.5rem;
+    left: 2rem;
+    transform: rotate(-30deg);
+}
+
+.hero-leaf-right {
+    bottom: 1.5rem;
+    right: 2rem;
+    transform: rotate(30deg) scaleX(-1);
+}
+
+/* CTA BUTTONS */
+.hero-cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius-pill);
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--terracotta);
+    color: var(--cream);
+    border: 2px solid var(--terracotta);
+}
+
+.btn-primary:hover {
+    background-color: rgb(160, 75, 45);
+    border-color: rgb(160, 75, 45);
+}
+
+.btn-ghost {
+    background-color: transparent;
+    color: var(--cream);
+    border: 2px solid var(--green-sage);
+}
+
+.btn-ghost:hover {
+    background-color: var(--green-mid);
+    border-color: var(--green-mid);
+}
+
+/* FEATURE STRIP — Three info cards below the hero */
+.feature-strip {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: var(--max-width);
+    margin: -2.5rem auto 3rem;
+    padding: 0 2.5rem;
+    position: relative;
+    z-index: 3;
+}
+
+.feature-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: var(--green-mist);
+    border: 2px solid var(--green-light);
+    border-radius: 12px;
+    padding: 1.8rem 1.2rem;
+    text-decoration: none;
+    color: var(--green-deep);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(28, 58, 38, 0.15);
+    border-color: var(--green-mid);
+}
+
+.feature-card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.feature-card-text {
+    font-size: 0.85rem;
+    color: var(--green-sage);
+}
+
+.feature-card-arrow {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 1rem;
+    font-size: 1.1rem;
+    color: var(--green-sage);
+    transition: transform var(--transition-base);
+}
+
+.feature-card:hover .feature-card-arrow {
+    transform: translateX(4px);
+    color: var(--terracotta);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero {
+        padding: 4rem 1.5rem 3.5rem;
+    }
+
+    .hero-heading {
+        font-size: 2.6rem;
+    }
+
+    .feature-strip {
+        flex-direction: column;
+        margin-top: -1.5rem;
+        padding: 0 1.5rem;
+    }
+}
