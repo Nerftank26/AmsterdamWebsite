@@ -2,8 +2,8 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 // 🔑 Supabase setup
 const supabase = createClient(
-    "https://YOUR_PROJECT_ID.supabase.co",
-    "YOUR_ANON_KEY"
+    "https://ffcxtiqxrlkjfccrunzk.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmY3h0aXF4cmxramZjY3J1bnprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMzM3NzMsImV4cCI6MjA5MTYwOTc3M30.pTiuFl_qNEi6gqMcstJDbWeogjLWfXm5SNkCE-AszKg"
 );
 
 /**
