@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/public/index.html" },
+
+    { "source": "/about", "destination": "/public/about/index.html" },
+    { "source": "/contact", "destination": "/public/contact/index.html" },
+    { "source": "/menus", "destination": "/public/menus/index.html" },
+    { "source": "/ordering", "destination": "/public/ordering/index.html" },
+    { "source": "/reviews", "destination": "/public/reviews/index.html" },
+    { "source": "/suggestions", "destination": "/public/suggestions/index.html" },
+    { "source": "/login", "destination": "/public/login/index.html" },
+    { "source": "/ingredients", "destination": "/public/ingredients/index.html" },
+
+    { "source": "/(.*)", "destination": "/public/$1" }
+  ]
+}
