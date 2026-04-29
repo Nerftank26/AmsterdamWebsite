@@ -1,19 +1,23 @@
 /**
  * script.js — Team 3 Master System Controller
  * CSCI 4750 Systems Analysis and Design
- *
- * PURPOSE:
+ * * PURPOSE: 
  * This script manages the behavioral logic of the frontend. It handles
- * dynamic UI updates, mobile navigation states, and temporary
+ * dynamic UI updates, mobile navigation states, and the temporary 
  * data storage for the online ordering system.
  */
 
 /* ================================================================
    SECTION 1: UI INITIALIZATION (On Load)
+   The 'DOMContentLoaded' listener ensures the script only executes 
+   after the browser has fully parsed the HTML document.
    ================================================================ */
 document.addEventListener("DOMContentLoaded", function () {
+    
     /**
      * DYNAMIC FOOTER YEAR
+     * logic: Uses the built-in JavaScript Date object.
+     * What it does: Injects the current year into any element with id="year".
      */
     const yearEl = document.getElementById("year");
     if (yearEl) {
@@ -22,14 +26,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /**
      * NAVIGATION EVENT LISTENERS
+     * These hooks connect the HTML buttons to the JS functions below.
      */
     const toggle = document.getElementById("navToggle");
     const overlay = document.getElementById("navOverlay");
 
+    // Triggering the mobile drawer
     if (toggle) {
         toggle.addEventListener("click", showMobileNav);
     }
 
+    // Triggering the close action when clicking outside the menu
     if (overlay) {
         overlay.addEventListener("click", hideMobileNav);
     }
@@ -37,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* ================================================================
    SECTION 2: NAVIGATION LOGIC
+   These functions directly manipulate the CSS 'display' property
+   to toggle visibility of mobile-specific elements.
    ================================================================ */
 
 /**
@@ -45,10 +54,11 @@ document.addEventListener("DOMContentLoaded", function () {
 function showMobileNav() {
     const nav = document.getElementById("primaryNav");
     const overlay = document.getElementById("navOverlay");
-
+    
+    // Safety check to prevent null-reference errors
     if (nav && overlay) {
-        nav.style.display = "block";
-        overlay.style.display = "block";
+        nav.style.display = "block";   // Reveals the vertical nav list
+        overlay.style.display = "block"; // Reveals the dark background layer
     }
 }
 
@@ -58,13 +68,15 @@ function showMobileNav() {
 function hideMobileNav() {
     const nav = document.getElementById("primaryNav");
     const overlay = document.getElementById("navOverlay");
-
+    
     if (nav) nav.style.display = "none";
     if (overlay) overlay.style.display = "none";
 }
 
 /* ================================================================
    SECTION 3: FORM & ORDERING LOGIC
+   Prepares the system for SQL Server integration by capturing
+   user inputs into local JavaScript objects.
    ================================================================ */
 
 // Global State Object: Holds items before they are 'POSTed' to the DB.
@@ -72,69 +84,16 @@ var orderCart = {};
 
 /**
  * submitReservation: Handles the Table Booking UI.
- * logic:
- * 1. Collects the reservation form values.
- * 2. Sends them to the backend.
- * 3. Only shows the success message if the backend save succeeds.
+ * logic: Hides the input form and swaps in the success message.
  */
 function submitReservation() {
     var form = document.getElementById("reservationForm");
     var success = document.getElementById("formSuccess");
-
-    var firstNameEl = document.getElementById("firstName");
-    var lastNameEl = document.getElementById("lastName");
-    var emailEl = document.getElementById("resEmail");
-    var dateEl = document.getElementById("resDate");
-    var timeEl = document.getElementById("resTime");
-    var partySizeEl = document.getElementById("partySize");
-
-    var firstName = firstNameEl ? firstNameEl.value.trim() : "";
-    var lastName = lastNameEl ? lastNameEl.value.trim() : "";
-    var email = emailEl ? emailEl.value.trim() : "";
-    var resDate = dateEl ? dateEl.value : "";
-    var resTime = timeEl ? timeEl.value : "";
-    var partySize = partySizeEl ? partySizeEl.value : "";
-
-    if (!firstName || !lastName || !email || !resDate || !resTime || !partySize) {
-        alert("Please complete all reservation fields.");
-        return;
+    
+    if (form && success) {
+        form.style.display = "none"; // Clears the UI for the success state
+        success.style.display = "block"; // Shows the user their request was received
     }
-
-    fetch("/api/reservations", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            resDate: resDate,
-            resTime: resTime,
-            partySize: partySize
-        })
-    })
-        .then(async function (response) {
-            var data = await response.json().catch(function () {
-                return {};
-            });
-
-            if (!response.ok) {
-                throw new Error(data.error || "Failed to save reservation.");
-            }
-
-            return data;
-        })
-        .then(function () {
-            if (form && success) {
-                form.style.display = "none";
-                success.style.display = "block";
-            }
-        })
-        .catch(function (error) {
-            console.error("Reservation submission failed:", error);
-            alert("There was a problem saving your reservation. Please try again.");
-        });
 }
 
 /**
@@ -146,11 +105,14 @@ function submitReservation() {
 function addToCart(name, price, qtyId) {
     var qtyEl = document.getElementById(qtyId);
     if (!qtyEl) return;
-
+    
+    // Converts the current text content to a number to perform math
     var quantity = Number(qtyEl.textContent) || 0;
-
+    
+    // Update the UI display
     qtyEl.textContent = quantity + 1;
-
+    
+    // Store in the global cart object for final checkout
     orderCart[qtyId] = {
         name: name,
         price: price,

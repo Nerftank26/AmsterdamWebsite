@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Ordering | The Amsterdam Local</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/ordering/style.css">
 </head>
 
 <body>
-
     <div class="nav-overlay" id="navOverlay"></div>
 
     <header class="site-header" id="siteHeader">
@@ -38,67 +36,58 @@
     </div>
 
     <div class="order-section">
-
         <div class="notice-box" id="orderStatus">
             <strong>✅ Pickup ordering is open.</strong>
-            3 of 4 pickup slots available (12:15 PM window).
+            Order fresh from our local kitchen.
         </div>
 
-        <div class="order-grid" id="orderGrid">
+        <div class="category-tabs" id="categoryTabs">
+            </div>
 
+        <div class="order-grid" id="orderGrid">
             <div class="items-column">
                 <h2 class="section-heading">Available for Pickup</h2>
-
-                <div class="order-item-card">
-                    <div class="item-info">
-                        <p class="order-item-name">The Neighborhood Burger</p>
-                        <p class="order-item-desc">8oz smash patty, aged cheddar, house sauce, fries</p>
-                        <p class="order-item-price">$16.00</p>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="removeFromCart('Neighborhood Burger', 16.00, 'qty1')">−</button>
-                        <span class="qty-display" id="qty1">0</span>
-                        <button class="qty-btn" onclick="addToCart('Neighborhood Burger', 16.00, 'qty1')">+</button>
-                    </div>
-                </div>
-
-                <div class="order-item-card">
-                    <div class="item-info">
-                        <p class="order-item-name">Short Rib Plate</p>
-                        <p class="order-item-desc">12-hour braised short rib, polenta, red wine reduction</p>
-                        <p class="order-item-price">$28.00</p>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="removeFromCart('Short Rib Plate', 28.00, 'qty2')">−</button>
-                        <span class="qty-display" id="qty2">0</span>
-                        <button class="qty-btn" onclick="addToCart('Short Rib Plate', 28.00, 'qty2')">+</button>
-                    </div>
+                
+                <div id="itemsContainer">
+                    <p style="text-align:center; padding:2rem; color:var(--green-mid);">
+                        Cultivating the menu...
+                    </p>
                 </div>
             </div>
 
             <div class="cart-column">
                 <div class="cart-panel" id="cartPanel">
                     <h2 class="cart-heading">Your Order</h2>
-
                     <p class="cart-empty" id="cartEmpty">No items added yet.</p>
-
                     <div id="cartItemsList"></div>
-
                     <div class="cart-total-row">
                         <span>Total</span>
                         <span id="cartTotalAmount">$0.00</span>
                     </div>
-
                     <p class="slot-warning" id="slotWarning" style="display:none;">
                         ⚠ Pickup slots fill fast. Confirm soon.
                     </p>
-
                     <button class="btn btn-primary btn-full" onclick="placeOrder()">
                         Place Pickup Order
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <div id="restrictionModal" class="modal-overlay hidden">
+        <div class="modal-content garden-border">
+            <div class="modal-icon">🌿</div>
+            <h2 class="modal-heading">Kitchen Catching Up</h2>
+            <p class="modal-text">
+                Our team is currently harvesting and prepping a large number of orders. 
+                We'll be back in just a moment!
+            </p>
+            <div id="timerDisplay" class="countdown-timer">00:00</div>
+            <p id="nextWindowTime" class="next-slot-text">Ordering resumes soon</p>
+            <button class="btn btn-ghost" onclick="closeRestrictionModal()" style="margin-top:1rem; border:1px solid var(--green-sage);">
+                View Menu Only
+            </button>
         </div>
     </div>
 
@@ -108,6 +97,7 @@
         </div>
     </footer>
 
+    <script src="/supabase-config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

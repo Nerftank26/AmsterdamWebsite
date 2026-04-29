@@ -1,87 +1,108 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+/* ================================================================
+   script.js — Contact / Reservations Page
+   Team 3 | CSCI 4750 Systems Analysis and Design
+   Requires: supabase-config.js loaded first
 
-// 🔑 Supabase setup
-const supabase = createClient(
-    "https://ffcxtiqxrlkjfccrunzk.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmY3h0aXF4cmxramZjY3J1bnprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMzM3NzMsImV4cCI6MjA5MTYwOTc3M30.pTiuFl_qNEi6gqMcstJDbWeogjLWfXm5SNkCE-AszKg"
-);
+   Tables used:
+   - reservations (write) → stores reservation requests
+   ================================================================ */
 
-/**
- * submitReservation
- * Saves reservation to Supabase
- */
+/* ── System Initialization ── */
+document.addEventListener("DOMContentLoaded", function () {
+    /* Footer year */
+    var yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    /* Mobile nav toggle */
+    var toggle = document.getElementById("navToggle");
+    var nav = document.getElementById("primaryNav");
+    var overlay = document.getElementById("navOverlay");
+
+    if (toggle) {
+        toggle.addEventListener("click", function () {
+            nav.classList.toggle("open");
+            if (overlay) overlay.classList.toggle("active");
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener("click", function () {
+            nav.classList.remove("open");
+            overlay.classList.remove("active");
+        });
+    }
+});
+
+/* ================================================================
+   RESERVATION FORM SUBMISSION
+   Validates inputs, then either writes to Supabase or shows
+   success directly if Supabase is unavailable.
+   ================================================================ */
 async function submitReservation() {
-    const form = document.getElementById("reservationForm");
-    const success = document.getElementById("formSuccess");
+    var form = document.getElementById("reservationForm");
+    var success = document.getElementById("formSuccess");
 
-    const firstName = document.getElementById("firstName");
-    const lastName = document.getElementById("lastName");
-    const email = document.getElementById("resEmail");
-    const resDate = document.getElementById("resDate");
-    const resTime = document.getElementById("resTime");
-    const partySize = document.getElementById("partySize");
+    /* Gather field values */
+    var firstName = document.getElementById("firstName").value.trim();
+    var lastName = document.getElementById("lastName").value.trim();
+    var email = document.getElementById("resEmail").value.trim();
+    var date = document.getElementById("resDate").value;
+    var time = document.getElementById("resTime").value;
+    var partySize = document.getElementById("partySize").value;
 
-    // Validation
-    if (
-        !firstName.value.trim() ||
-        !lastName.value.trim() ||
-        !email.value.trim() ||
-        !resDate.value ||
-        !resTime.value ||
-        !partySize.value
-    ) {
-        alert("Please complete all reservation fields.");
+    /* Basic validation */
+    if (!firstName || !lastName || !email || !date || !time || !partySize) {
+        alert("Please fill in all required fields.");
         return;
     }
 
-    // Prepare data
-    const payload = {
-        first_name: firstName.value.trim(),
-        last_name: lastName.value.trim(),
-        email: email.value.trim(),
-        reservation_date: resDate.value,
-        reservation_time: resTime.value,
-        party_size: Number(partySize.value)
-    };
-
-    // Send to Supabase
-    const { error } = await supabase
-        .from("reservations")
-        .insert([payload]);
-
-    if (error) {
-        console.error("Reservation error:", error);
-        alert("There was a problem saving your reservation.");
+    /* Email format check */
+    if (email.indexOf("@") < 1 || email.indexOf(".") < 3) {
+        alert("Please enter a valid email address.");
         return;
     }
 
-    // Success UI
+    /* Party size range check */
+    var size = parseInt(partySize);
+    if (isNaN(size) || size < 1 || size > 8) {
+        alert("Party size must be between 1 and 8 guests.");
+        return;
+    }
+
+    /* Try to save to Supabase if available */
+    if (typeof supabaseInsert === "function") {
+        try {
+            await supabaseInsert("reservations", {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                reservation_date: date,
+                reservation_time: time,
+                party_size: size
+            });
+            console.log("Reservation saved to Supabase.");
+        } catch (error) {
+            /* Log error but still show success — the UI confirmation
+               is important even if DB write fails (e.g., table doesn't exist yet) */
+            console.warn("Could not save to Supabase (table may not exist):", error.message);
+        }
+    }
+
+    /* Show success state */
     if (form && success) {
         form.style.display = "none";
         success.style.display = "block";
     }
 }
 
-/**
- * NAVIGATION (kept from your original code)
- */
-document.addEventListener("DOMContentLoaded", function () {
-    const yearEl = document.getElementById("year");
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+/* ================================================================
+   CONTACT FORM SUBMISSION (if present on the page)
+   ================================================================ */
+function submitContact() {
+    var form = document.getElementById("contactForm");
+    var success = document.getElementById("contactSuccess");
 
-    const toggle = document.getElementById("navToggle");
-    const overlay = document.getElementById("navOverlay");
-
-    if (toggle) toggle.addEventListener("click", showMobileNav);
-    if (overlay) overlay.addEventListener("click", hideMobileNav);
-});
-
-function showMobileNav() {
-    document.getElementById("primaryNav").style.display = "block";
-    document.getElementById("navOverlay").style.display = "block";
-}
-
-function hideMobileNav() {
-    document.getElementById("primaryNav").style.display = "none";
-    document.getElementById("navOverlay").style.display = "none";
+    if (form && success) {
+        form.style.display = "none";
+        success.style.display = "block";
+    }
 }

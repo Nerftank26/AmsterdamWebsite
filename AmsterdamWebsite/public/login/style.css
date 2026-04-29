@@ -1,4 +1,159 @@
 /* ================================================================
+   BASE STYLES — CSS Variables, Reset, Header, Nav, Footer
+   Injected from root style.css so each subfolder is self-contained.
+   ================================================================ */
+
+:root {
+    --green-deep:    rgb(28,  58,  38);
+    --green-mid:     rgb(62,  105, 74);
+    --green-sage:    rgb(120, 157, 120);
+    --green-light:   rgb(195, 220, 190);
+    --green-mist:    rgb(232, 242, 228);
+    --cream:         rgb(252, 248, 238);
+    --linen:         rgb(228, 218, 200);
+    --text-on-dark:  rgb(252, 248, 238);
+    --terracotta:    rgb(188, 90,  55);
+    --gold:          rgb(195, 158, 68);
+    --font-display:  'Georgia', serif;
+    --font-body:     'Trebuchet MS', sans-serif;
+    --max-width:     1160px;
+    --nav-height:    72px;
+    --transition-base: 260ms ease;
+    --radius-pill:   999px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+    background-color: var(--cream);
+    color: rgb(28, 35, 28);
+    font-family: var(--font-body);
+    line-height: 1.75;
+    padding-top: var(--nav-height);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- HEADER --- */
+.site-header {
+    position: fixed; top: 0; left: 0; width: 100%;
+    height: var(--nav-height);
+    background-color: var(--green-deep);
+    display: flex; align-items: center; justify-content: space-between;
+    padding-inline: 2.5rem;
+    z-index: 1000;
+    border-bottom: 3px solid var(--green-mid);
+}
+
+.logo {
+    display: flex; flex-direction: column;
+    text-decoration: none;
+    font-family: var(--font-display);
+}
+.logo-the {
+    font-size: 0.6rem; text-transform: uppercase;
+    color: var(--green-light); letter-spacing: 0.2em;
+}
+.logo-main {
+    font-size: 1.4rem; font-weight: bold;
+    color: var(--text-on-dark);
+}
+
+/* --- NAV LINKS --- */
+.primary-nav { display: flex; align-items: center; gap: 0.5rem; }
+
+.nav-link {
+    color: var(--green-light);
+    font-size: 0.8rem; font-weight: bold;
+    text-transform: uppercase; text-decoration: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: color var(--transition-base), background var(--transition-base);
+}
+.nav-link:hover {
+    color: var(--cream);
+    background: rgba(255, 255, 255, 0.1);
+}
+.nav-link.active {
+    color: var(--cream);
+    border-bottom: 2px solid var(--gold);
+}
+.nav-link-staff {
+    margin-left: 1rem;
+    border: 1px solid var(--green-sage);
+}
+.nav-link-staff:hover {
+    border-color: var(--gold); color: var(--gold);
+}
+
+/* --- HAMBURGER TOGGLE --- */
+.nav-toggle {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 6px;
+}
+.nav-toggle span {
+    display: block; width: 26px; height: 3px;
+    background: var(--cream); border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* --- NAV OVERLAY --- */
+.nav-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 999;
+}
+.nav-overlay.active { display: block; }
+
+/* --- BUTTONS --- */
+.btn {
+    display: inline-block; font-family: var(--font-body);
+    font-size: 0.85rem; font-weight: bold;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    text-decoration: none; padding: 0.85rem 2rem;
+    border-radius: var(--radius-pill);
+    transition: all var(--transition-base); cursor: pointer;
+    border: none;
+}
+.btn-primary {
+    background-color: var(--terracotta); color: var(--cream);
+    border: 2px solid var(--terracotta);
+}
+.btn-primary:hover {
+    background-color: rgb(160, 75, 45); border-color: rgb(160, 75, 45);
+}
+.btn-full { width: 100%; text-align: center; }
+
+/* --- FOOTER --- */
+.site-footer {
+    background-color: var(--green-deep);
+    border-top: 4px solid var(--gold);
+    padding: 2rem 2.5rem 1.5rem;
+    color: var(--green-light); font-size: 0.85rem; text-align: center;
+}
+.site-footer a { color: var(--gold); text-decoration: none; }
+.footer-staff-link { margin-left: 1.5rem; opacity: 0.6; }
+.footer-staff-link:hover { opacity: 1; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .nav-toggle { display: flex; }
+    .primary-nav {
+        display: none; flex-direction: column;
+        position: absolute; top: var(--nav-height); left: 0; right: 0;
+        background: var(--green-deep); padding: 1rem;
+        border-top: 1px solid var(--green-mid);
+        z-index: 1001;
+    }
+    .primary-nav.open { display: flex; }
+    .nav-link-staff { margin-left: 0; margin-top: 0.5rem; text-align: center; }
+    .site-header { padding-inline: 1.25rem; }
+}
+
+/* ================================================================
+   END BASE STYLES
+   ================================================================ */
+
+/* ================================================================
    login.css — Staff Portal · Garden Zen Utopia
    Team 3 | CSCI 4750 Systems Analysis and Design
 

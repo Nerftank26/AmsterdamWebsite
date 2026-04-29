@@ -1,3 +1,25 @@
+/* ── Shared Init: Nav Toggle + Footer Year ── */
+document.addEventListener("DOMContentLoaded", function () {
+    var yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+    var toggle = document.getElementById("navToggle");
+    var nav = document.getElementById("primaryNav");
+    var overlay = document.getElementById("navOverlay");
+    if (toggle) {
+        toggle.addEventListener("click", function () {
+            nav.classList.toggle("open");
+            if (overlay) overlay.classList.toggle("active");
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener("click", function () {
+            nav.classList.remove("open");
+            overlay.classList.remove("active");
+        });
+    }
+});
+
+
 /**
  * switchLoginRole
  * @param {string} role - 'admin' or 'staff'
